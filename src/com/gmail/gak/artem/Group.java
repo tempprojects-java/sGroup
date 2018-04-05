@@ -108,17 +108,18 @@ public class Group {
 
 	@Override
 	public String toString() {
-		Student[] buffer = students;
-
-		Utility.sort(buffer, 0, students.length - 1);
+		Student[] buffer = new Student[students.length];
+		System.arraycopy(students, 0, buffer, 0, students.length);
+		
+		Utility.sort(buffer, 0, buffer.length - 1);
 
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < students.length; ++i) {
-			if (students[i] == null) {
+		for (int i = 0; i < buffer.length; ++i) {
+			if (buffer[i] == null) {
 				sb.append("null\n");
 				continue;
 			}
-			sb.append(students[i].getFullName() + "\n");
+			sb.append(buffer[i].getFullName() + "\n");
 		}
 
 		return sb.toString();
