@@ -28,7 +28,8 @@ public class Group {
 		return false;
 	}
 
-	public boolean setStudent(Student student, int index) throws NullPointerException, GroupDuplicateException, GroupLimitException {
+	public boolean setStudent(Student student, int index)
+			throws NullPointerException, GroupDuplicateException, GroupLimitException {
 		if (student == null) {
 			throw new NullPointerException();
 		}
@@ -37,7 +38,7 @@ public class Group {
 			if (students[index] != null) {
 				return false;
 			} else if (isSetStudent(student)) {
-				throw new GroupDuplicateException(); 
+				throw new GroupDuplicateException();
 			}
 			students[index] = student;
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -77,6 +78,20 @@ public class Group {
 		return -1;
 	}
 
+	public Student findStudentByName(String name) {
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		
+		for (int i = 0; i < students.length; ++i) {
+			if(students[i].getName().equals(name)) {
+				return students[i];
+			}
+		}
+		
+		return null;
+	}
+
 	public Student[] getStudents() {
 		return students;
 	}
@@ -90,13 +105,13 @@ public class Group {
 
 		this.students = students;
 	}
-	
+
 	@Override
 	public String toString() {
 		Student[] buffer = students;
-		
+
 		Utility.sort(buffer, 0, students.length - 1);
-		
+
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < students.length; ++i) {
 			if (students[i] == null) {
