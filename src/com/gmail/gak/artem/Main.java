@@ -18,6 +18,8 @@ public class Main {
 		
 		System.out.println("\n\n------- Students -----------\n\n");
 		System.out.println(group.toString());
+		
+		System.out.println(group.findStudentBySurname("Sname #4"));
 	}
 	
 	public static Student generaeteRandomStudent(String name, String surname, Sex sex) {

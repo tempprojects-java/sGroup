@@ -77,14 +77,14 @@ public class Group {
 
 		return -1;
 	}
-
-	public Student findStudentByName(String name) {
-		if (name == null) {
+	
+	public Student findStudentBySurname(String surname) {
+		if (surname == null) {
 			throw new NullPointerException();
 		}
 		
 		for (int i = 0; i < students.length; ++i) {
-			if(students[i].getName().equals(name)) {
+			if(students[i] != null && students[i].getSurname().equals(surname)) {
 				return students[i];
 			}
 		}
