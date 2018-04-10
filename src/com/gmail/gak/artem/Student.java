@@ -1,27 +1,51 @@
 package com.gmail.gak.artem;
 
+import java.util.Scanner;
+
 public class Student extends Human {
 
+	private String rcard;
 	private String moniker;
 	private double gpa;
 	private int truancies;
+	
+	public Student(Scanner sc) {
+		super(sc);
+		
+		sc.nextLine();
+		
+		System.out.println("Record Card:");
+		this.rcard = sc.nextLine();
+		
+		System.out.println("Moniker:");
+		this.moniker = sc.nextLine();
+		
+		System.out.println("Grade point average (GPA):");
+		this.gpa = Utility.inputDoubleValue(sc);
+		
+		System.out.println("Count of truancies:");
+		this.truancies = Utility.inputIntValue(sc);
+	}
 
-	public Student(String name, String surname, Sex sex) {
-		super(name, surname, sex);
+	public Student(String name, String surname, Sex sex, int age, String rcard) {
+		super(name, surname, sex, age);
+		
+		this.rcard = rcard;
 	}
 
 	public Student() {
 		super();
 	}
-
+	
 	@Override
-	public StringBuilder getInfo() {
-		StringBuilder sb = super.getInfo();
+	public String getInfo() {
+		StringBuilder sb = new StringBuilder(super.getInfo());
+		sb.append("Record Card: " + rcard + "\n");
 		sb.append("Moniker: " + moniker + "\n");
 		sb.append("GPA: " + gpa + "\n");
 		sb.append("Truancies: " + truancies + "\n");
 
-		return sb;
+		return sb.toString();
 	}
 
 	public String getMoniker() {
@@ -30,7 +54,7 @@ public class Student extends Human {
 
 	public void setMoniker(String moniker) {
 		if (moniker == null) {
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 		}
 		this.moniker = moniker;
 	}
@@ -51,54 +75,18 @@ public class Student extends Human {
 		this.truancies = truancies;
 	}
 
-	public int compareTo(Student student) {
-		if(student == null) {
-			return -1;
-		}
-		return super.getFullName().compareTo(student.getFullName());
+	public String getRcard() {
+		return rcard;
 	}
-	
-	@Override
-	public String toString() {
-		return "Student [name=" + super.getName() + ", surname=" + super.getSurname() + ", gender=" + super.getSex()
-				+ ", moniker=" + moniker + ", gpa=" + gpa + ", truancies=" + truancies + "]";
+
+	public void setRcard(String rcard) {
+		this.rcard = rcard;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Student other = (Student) obj;
-		if (Double.doubleToLongBits(gpa) != Double.doubleToLongBits(other.gpa)) {
-			return false;
-		}
-		if (moniker == null) {
-			if (other.moniker != null) {
-				return false;
-			}
-		} else if (!moniker.equals(other.moniker)) {
-			return false;
-		}
-		if (truancies != other.truancies) {
-			return false;
-		}
-		if(!super.getName().equals(other.getName()) ) {
-			return false;
-		}
-		if(!super.getSurname().equals(other.getSurname())) {
-			return false;
-		}
-		if(!super.getSex().equals(other.getSex())) {
-			return false;
-		}
-		return true;
+	public String toString() {
+		return "Student [name=" + super.getName() + ", surname=" + super.getSurname() + ", gender=" + super.getSex()
+				+ ", age=" + super.getAge() + ", moniker=" + moniker + ", gpa=" + gpa + ", truancies=" + truancies + "]";
 	}
 
 }

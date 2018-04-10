@@ -1,48 +1,67 @@
 package com.gmail.gak.artem;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Utility {
 
 	public Utility() {
 		super();
 	}
-	
-	public static void sort(Student[] students, int left, int right)
-	{
-	    if (left < right)
-	    {
-	        int pivotIndex = left - (left - right) / 2;
-	        int newPivot = partition(students, left, right, pivotIndex);
-	 
-	        sort(students, left, newPivot - 1);
-	        sort(students, newPivot + 1, right);
-	    }
+
+	public static Sex inputSexValue(Scanner sc) {
+		Sex result = Sex.MALE;
+		boolean success = false;
+
+		while (!success) {
+			int code = inputIntValue(sc);
+			if (code == 0) {
+				result = Sex.MALE;
+				success = true;
+			} else if (code == 1) {
+				result = Sex.FMALE;
+				success = true;
+			} else {
+				System.out.println("Invalid value, try again --");
+			}
+		}
+
+		return result;
 	}
 
-	private static int partition(Student[] students, int left, int right, int pivotIndex)
-	{
-	    Student pivotValue = students[pivotIndex];
-	 
-	    swap(students, pivotIndex, right);
-	 
-	    int storeIndex = left;
-	 
-	    for (int i = left; i < right; ++i)
-	    {
-	        if (students[i] != null && students[i].compareTo(pivotValue) < 0)
-	        {
-	        	swap(students, i, storeIndex);
-	            storeIndex += 1;
-	        }
-	    }
-	 
-	    swap(students, storeIndex, right);
-	    return storeIndex;
-	}
-	
-	private static void swap(Student[] students, int indexA , int indexB) {
-		Student buffer = students[indexA];
-		students[indexA] = students[indexB];
-		students[indexB] = buffer;
+	public static double inputDoubleValue(Scanner sc) {
+		double result = 0.0;
+		boolean success = false;
+
+		while (!success) {
+			try {
+				result = sc.nextDouble();
+				success = true;
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid value, try again");
+				sc.next();
+				success = false;
+			}
+		}
+
+		return result;
 	}
 
+	public static int inputIntValue(Scanner sc) {
+		int result = 0;
+		boolean success = false;
+
+		while (!success) {
+			try {
+				result = sc.nextInt();
+				success = true;
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid value, try again");
+				sc.next();
+				success = false;
+			}
+		}
+
+		return result;
+	}
 }
