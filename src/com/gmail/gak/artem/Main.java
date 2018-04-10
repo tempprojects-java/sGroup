@@ -20,16 +20,18 @@ public class Main {
 			g.pushStudent(sD);
 			g.pushStudent(sE);
 			
-			g.createStudent();
 			
+			System.out.println("--- Create new Student Record ---");
 			g.createStudent();
 			
 		} catch(IllegalStudentException | GroupDuplicateException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		g.sortByAgeDesc();
+		g.sortBySurname();
 		System.out.println(g.toString());
+		
+		System.out.println("--- Draftees ---");
 		
 		Student[] draftees = g.getDraftees();
 		
